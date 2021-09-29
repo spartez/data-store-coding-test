@@ -1,30 +1,30 @@
 import InMemoryStore from '../src/inMemoryStore';
 
-describe('realtime database - listeners', () => {
-    let db: InMemoryStore;
+describe('listeners', () => {
+    let store: InMemoryStore;
 
     beforeEach(() => {
-        db = new InMemoryStore();
+        store = new InMemoryStore();
     });
 
     it('tiggers callback for exact path', async () => {
         const callback = jest.fn();
-        await db.addListener('foo/bar', callback);
+        await store.addListener('foo/bar', callback);
 
         expect(callback).toBeCalledWith(undefined);
 
-        await db.update('foo/bar', 42);
+        await store.write('foo/bar', 42);
 
         expect(callback).toBeCalledWith(42);
     });
 
     it('tiggers callback for parent path', async () => {
         const callback = jest.fn();
-        await db.addListener('foo', callback);
+        await store.addListener('foo', callback);
 
         expect(callback).toBeCalledWith(undefined);
 
-        await db.update('foo/bar', 42);
+        await store.write('foo/bar', 42);
 
         expect(callback).toBeCalledWith({
             bar: 42,
@@ -33,11 +33,11 @@ describe('realtime database - listeners', () => {
 
     it('tiggers callback for root path', async () => {
         const callback = jest.fn();
-        await db.addListener('/', callback);
+        await store.addListener('/', callback);
 
         expect(callback).toBeCalledWith({});
 
-        await db.update('foo/bar', 42);
+        await store.write('foo/bar', 42);
 
         expect(callback).toBeCalledWith({
             foo: {
@@ -50,15 +50,15 @@ describe('realtime database - listeners', () => {
         const fooCallback = jest.fn();
         const fooBarCallback = jest.fn();
         const fooBazCallback = jest.fn();
-        await db.addListener('foo', fooCallback);
-        await db.addListener('foo/bar', fooBarCallback);
-        await db.addListener('foo/baz', fooBazCallback);
+        await store.addListener('foo', fooCallback);
+        await store.addListener('foo/bar', fooBarCallback);
+        await store.addListener('foo/baz', fooBazCallback);
 
         expect(fooCallback).toBeCalledWith(undefined);
         expect(fooBarCallback).toBeCalledWith(undefined);
         expect(fooBazCallback).toBeCalledWith(undefined);
 
-        await db.update('foo/bar', 42);
+        await store.write('foo/bar', 42);
 
         expect(fooCallback).toBeCalledWith({
             bar: 42,

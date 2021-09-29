@@ -1,13 +1,13 @@
 import DataStore, { ListenerCallback, StoredValue } from './dataStore';
 
 export default class InMemoryStore implements DataStore {
-    constructor(initialData: any = {}) {}
+    constructor(initialData: object = {}) {}
 
     public async read(path: string): Promise<StoredValue> {
         throw new Error('Not implemented');
     }
 
-    public async update(path: string, value: StoredValue): Promise<void> {
+    public async write(path: string, value: StoredValue): Promise<void> {
         throw new Error('Not implemented');
     }
 

@@ -7,23 +7,23 @@ const SAMPLE_FILE = resolve(__dirname, 'data.sample.json');
 const DATA_FILE = resolve(__dirname, 'data.json');
 const NON_EXISTING_FILE = resolve(__dirname, 'new-data.json');
 
-describe('realtime database', () => {
-    let db: FileStore;
+describe('persistence', () => {
+    let store: FileStore;
 
     beforeEach(async () => {
         await copyFile(SAMPLE_FILE, DATA_FILE);
         try {
             await unlink(NON_EXISTING_FILE);
         } catch (error) {}
-        db = new FileStore(DATA_FILE);
+        store = new FileStore(DATA_FILE);
     });
 
     it('read value from file', async () => {
-        expect(await db.read('foo/bar')).toBe('test');
+        expect(await store.read('foo/bar')).toBe('test');
     });
 
     it('saves value to file', async () => {
-        await db.update('foo', { bar: 42 });
+        await store.write('foo', { bar: 42 });
 
         const data = await readFile(DATA_FILE);
         expect(JSON.parse(data.toString())).toStrictEqual({
@@ -34,11 +34,11 @@ describe('realtime database', () => {
     });
 
     it(`creates new file if it doesn't exist`, async () => {
-        const emptyDb = new FileStore(NON_EXISTING_FILE);
+        const emptyStore = new FileStore(NON_EXISTING_FILE);
 
-        expect(await emptyDb.read('foo/bar')).toBe(undefined);
+        expect(await emptyStore.read('foo/bar')).toBe(undefined);
 
-        await emptyDb.update('foo', { bar: 42 });
+        await emptyStore.write('foo', { bar: 42 });
 
         const data = await readFile(NON_EXISTING_FILE);
         expect(JSON.parse(data.toString())).toStrictEqual({
