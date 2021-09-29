@@ -43,6 +43,6 @@ describe('realtime database - update', () => {
     });
 
     it(`doesn't allow to update root value`, async () => {
-        await expect(() => db.update('/', 42)).rejects.toThrowError();
+        await expect(() => db.update('/', 42)).rejects.toThrowError('Cannot update root value');
     });
 });
