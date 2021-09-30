@@ -1,7 +1,11 @@
-import DataStore, { ListenerCallback, StoredValue } from './dataStore';
+import DataStore, { ObserverCallback, StoredValue } from './dataStore';
 
 export default class InMemoryStore implements DataStore {
-    constructor(initialData: object = {}) {}
+    protected data: object;
+
+    constructor(initialData: object = {}) {
+        this.data = initialData;
+    }
 
     public async read(path: string): Promise<StoredValue> {
         throw new Error('Not implemented');
@@ -11,7 +15,7 @@ export default class InMemoryStore implements DataStore {
         throw new Error('Not implemented');
     }
 
-    public async addListener(path: string, callback: ListenerCallback): Promise<void> {
+    public async observe(path: string, callback: ObserverCallback): Promise<void> {
         throw new Error('Not implemented');
     }
 }

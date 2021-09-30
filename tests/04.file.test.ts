@@ -7,7 +7,7 @@ const SAMPLE_FILE = resolve(__dirname, 'data.sample.json');
 const DATA_FILE = resolve(__dirname, 'data.json');
 const NON_EXISTING_FILE = resolve(__dirname, 'new-data.json');
 
-describe('persistence', () => {
+describe('file', () => {
     let store: FileStore;
 
     beforeEach(async () => {
@@ -19,7 +19,7 @@ describe('persistence', () => {
     });
 
     it('read value from file', async () => {
-        expect(await store.read('foo/bar')).toBe('test');
+        expect(await store.read('foo.bar')).toBe('test');
     });
 
     it('saves value to file', async () => {
@@ -36,7 +36,7 @@ describe('persistence', () => {
     it(`creates new file if it doesn't exist`, async () => {
         const emptyStore = new FileStore(NON_EXISTING_FILE);
 
-        expect(await emptyStore.read('foo/bar')).toBe(undefined);
+        expect(await emptyStore.read('foo.bar')).toBe(undefined);
 
         await emptyStore.write('foo', { bar: 42 });
 

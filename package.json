@@ -1,10 +1,14 @@
 {
   "name": "data-store-coding-test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Data store coding test",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:read": "jest 01.read.test.ts",
+    "test:write": "jest 02.write.test.ts",
+    "test:observe": "jest 03.observe.test.ts",
+    "test:file": "jest 04.file.test.ts"
   },
   "author": "Spartez Software",
   "license": "MIT",

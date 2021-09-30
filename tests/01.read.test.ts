@@ -8,11 +8,11 @@ describe('read', () => {
     });
 
     it('reads data at specified path', async () => {
-        expect(await store.read('foo/bar')).toBe(42);
+        expect(await store.read('foo.bar')).toBe(42);
     });
 
     it('reads undefined if data is missing', async () => {
-        expect(await store.read('foo/bar/baz/a/b/c')).toBe(undefined);
+        expect(await store.read('foo.bar.baz.a.b.c')).toBe(undefined);
     });
 
     it('reads all children values', async () => {
@@ -22,7 +22,7 @@ describe('read', () => {
     });
 
     it('reads full data for root path', async () => {
-        expect(await store.read('/')).toStrictEqual({
+        expect(await store.read('.')).toStrictEqual({
             foo: {
                 bar: 42,
             },
