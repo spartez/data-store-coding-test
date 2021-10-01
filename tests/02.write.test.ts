@@ -10,7 +10,7 @@ describe('write', () => {
     it('updates value', async () => {
         await store.write('foo.bar', 42);
 
-        expect(await store.read('foo/bar')).toBe(42);
+        expect(await store.read('foo.bar')).toBe(42);
     });
 
     it('updates object value', async () => {
