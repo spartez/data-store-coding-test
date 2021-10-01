@@ -8,7 +8,8 @@
     "test:read": "jest 01.read.test.ts",
     "test:write": "jest 02.write.test.ts",
     "test:observe": "jest 03.observe.test.ts",
-    "test:file": "jest 04.file.test.ts"
+    "test:file": "jest 04.file.test.ts",
+    "test:typed": "jest 05.typed.test.ts"
   },
   "author": "Spartez Software",
   "license": "MIT",

@@ -31,10 +31,11 @@ For example, given the data structure shown above we should expect the following
 
 ## Implementation
 
-There are two classes to be implemented:
+There are three classes to be implemented:
 
 - `InMemoryStore` - should keep the data in-memory.
 - `FileStore` - should read and write the data to file.
+- `TypedStore` - `read` should return values with types depending on provided schema
 
 ## Tests
 
@@ -44,3 +45,4 @@ There are ordered test files in `tests/` folder, we strongly suggest that you fi
 2. `02.write.test` - tests `write` method of `InMemoryStore`
 3. `03.observe.test` - tests `observe` method of `InMemoryStore`
 4. `04.file.test` - tests reading and saving to file by `FileStore`
+5. `05.typed.test` - tests checking if types returned by `TypedStore` are correct
