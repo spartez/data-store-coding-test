@@ -1,4 +1,5 @@
-export type StoredValue = string | number | boolean | object | undefined;
+export type StoredValue = string | number | boolean | undefined | StoredObject;
+export type StoredObject = { [key: string]: StoredValue };
 
 export type ObserverCallback = (value: StoredValue) => void;
 

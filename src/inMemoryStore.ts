@@ -1,9 +1,9 @@
-import DataStore, { ObserverCallback, StoredValue } from './dataStore';
+import DataStore, { ObserverCallback, StoredObject, StoredValue } from './dataStore';
 
 export default class InMemoryStore implements DataStore {
-    protected data: object;
+    protected data: StoredObject;
 
-    constructor(initialData: object = {}) {
+    constructor(initialData: StoredObject = {}) {
         this.data = initialData;
     }
 
