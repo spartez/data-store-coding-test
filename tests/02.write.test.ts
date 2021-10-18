@@ -19,7 +19,7 @@ describe('write', () => {
         expect(await store.read('foo.bar')).toBe(42);
     });
 
-    it('skips irrelevant slashes', async () => {
+    it('ignores repeated dots', async () => {
         await store.write('.foo..bar...', 42);
 
         expect(await store.read('foo...bar.')).toBe(42);

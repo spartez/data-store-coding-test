@@ -21,6 +21,10 @@ describe('read', () => {
         });
     });
 
+    it('ignores repeated dots', async () => {
+        expect(await store.read('foo...bar')).toBe(42);
+    });
+
     it('reads full data for root path', async () => {
         expect(await store.read('.')).toStrictEqual({
             foo: {
